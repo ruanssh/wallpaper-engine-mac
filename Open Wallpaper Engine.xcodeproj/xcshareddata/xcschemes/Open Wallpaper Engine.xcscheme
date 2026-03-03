@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5EC47E752A2DB2E600120CCC"
-               BuildableName = "Open Wallpaper Engine.app"
-               BlueprintName = "Open Wallpaper Engine"
+               BuildableName = "WallpaperEngineMac.app"
+               BlueprintName = "WallpaperEngineMac"
                ReferencedContainer = "container:Open Wallpaper Engine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -68,8 +68,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5EC47E752A2DB2E600120CCC"
-            BuildableName = "Open Wallpaper Engine.app"
-            BlueprintName = "Open Wallpaper Engine"
+            BuildableName = "WallpaperEngineMac.app"
+            BlueprintName = "WallpaperEngineMac"
             ReferencedContainer = "container:Open Wallpaper Engine.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -85,8 +85,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5EC47E752A2DB2E600120CCC"
-            BuildableName = "Open Wallpaper Engine.app"
-            BlueprintName = "Open Wallpaper Engine"
+            BuildableName = "WallpaperEngineMac.app"
+            BlueprintName = "WallpaperEngineMac"
             ReferencedContainer = "container:Open Wallpaper Engine.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

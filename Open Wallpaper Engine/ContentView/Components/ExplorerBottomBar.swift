@@ -16,20 +16,24 @@ struct ExplorerBottomBar: View {
                     Button { } label: {
                         Label("Load", systemImage: "folder.fill")
                     }
+                    .disabled(true)
                     Button { } label: {
                         Label("Save", systemImage: "square.and.arrow.down.fill")
                     }
+                    .disabled(true)
                     Button { } label: {
                         Label("Configure", systemImage: "gearshape.2.fill")
                     }
-                    Button { } label: {
+                    .disabled(true)
+                    Button {
+                        AppDelegate.shared.openImportFromFolderPanel()
+                    } label: {
                         Label("Add Wallpaper", systemImage: "plus")
                     }
                     .buttonStyle(.borderedProminent)
                 }
                 Spacer()
             }
-            .disabled(true)
             HStack {
                 Button { } label: {
                     Label("Wallpaper Editor", systemImage: "pencil.and.ruler.fill")

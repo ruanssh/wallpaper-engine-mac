@@ -23,8 +23,8 @@ struct FirstLaunchView: View {
             .fixedSize()
             VStack {
                 Group {
-                    NewSection(title: "Import Wallpapers from Steam Workshop",
-                               text: "You can easily import video type wallpapers from steam workshop of Wallpaper Engine and modify some properties as well, like playback rate, volume, etc.",
+                    NewSection(title: "Import Wallpapers from Discover",
+                               text: "You can browse online wallpapers in Discover and import them directly, without manual download.",
                                systemImage: "square.and.arrow.down")
                     NewSection(title: "Similar UI Layout to Wallpaper Engine on Steam",
                                text: "You may feel familar when using this dynamic desktop wallpaper tool since it almost has the same layout to its ancesstor.",

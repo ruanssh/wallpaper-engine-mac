@@ -91,7 +91,7 @@
 		5EAF3F732A87110700F85685 /* PluginsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginsPage.swift; sourceTree = "<group>"; };
 		5EB152A02A82ADEB007EA845 /* Open_Wallpaper_Engine.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Open_Wallpaper_Engine.docc; sourceTree = "<group>"; };
 		5EB4DB872A980532000A1FEA /* ExplorerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerItem.swift; sourceTree = "<group>"; };
-		5EC47E762A2DB2E600120CCC /* Open Wallpaper Engine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Open Wallpaper Engine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EC47E762A2DB2E600120CCC /* WallpaperEngineMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallpaperEngineMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EC47E7D2A2DB2E700120CCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EC47E802A2DB2E700120CCC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5EC47E872A2DB2E700120CCC /* Open_Wallpaper_Engine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Open_Wallpaper_Engine.entitlements; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 		5EC47E772A2DB2E600120CCC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5EC47E762A2DB2E600120CCC /* Open Wallpaper Engine.app */,
+				5EC47E762A2DB2E600120CCC /* WallpaperEngineMac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -308,9 +308,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5EC47E752A2DB2E600120CCC /* Open Wallpaper Engine */ = {
+		5EC47E752A2DB2E600120CCC /* WallpaperEngineMac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5EC47EA02A2DB2E700120CCC /* Build configuration list for PBXNativeTarget "Open Wallpaper Engine" */;
+			buildConfigurationList = 5EC47EA02A2DB2E700120CCC /* Build configuration list for PBXNativeTarget "WallpaperEngineMac" */;
 			buildPhases = (
 				5EC47E722A2DB2E600120CCC /* Sources */,
 				5EC47E732A2DB2E600120CCC /* Frameworks */,
@@ -320,9 +320,9 @@
 			);
 			dependencies = (
 			);
-			name = "Open Wallpaper Engine";
+			name = WallpaperEngineMac;
 			productName = "Open Wallpaper Engine";
-			productReference = 5EC47E762A2DB2E600120CCC /* Open Wallpaper Engine.app */;
+			productReference = 5EC47E762A2DB2E600120CCC /* WallpaperEngineMac.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -354,7 +354,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5EC47E752A2DB2E600120CCC /* Open Wallpaper Engine */,
+				5EC47E752A2DB2E600120CCC /* WallpaperEngineMac */,
 			);
 		};
 /* End PBXProject section */
@@ -553,7 +553,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "Open Wallpaper Engine/Open_Wallpaper_Engine.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -591,7 +591,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "Open Wallpaper Engine/Open_Wallpaper_Engine.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -633,7 +633,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5EC47EA02A2DB2E700120CCC /* Build configuration list for PBXNativeTarget "Open Wallpaper Engine" */ = {
+		5EC47EA02A2DB2E700120CCC /* Build configuration list for PBXNativeTarget "WallpaperEngineMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5EC47EA12A2DB2E700120CCC /* Debug */,

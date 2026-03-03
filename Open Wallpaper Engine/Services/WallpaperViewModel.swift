@@ -27,7 +27,10 @@ class WallpaperViewModel: ObservableObject {
     
     @Published var currentWallpaper: WEWallpaper
     {
-        didSet { UserDefaults.standard.set(try! JSONEncoder().encode(currentWallpaper), forKey: "CurrentWallpaper") }
+        didSet {
+            UserDefaults.standard.set(try! JSONEncoder().encode(currentWallpaper), forKey: "CurrentWallpaper")
+            AppDelegate.shared.setPlacehoderWallpaper(with: currentWallpaper)
+        }
     }
     
     var lastPlayRate: Float = 1.0

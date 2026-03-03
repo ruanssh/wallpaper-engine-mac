@@ -61,28 +61,6 @@ struct TopTabBar: SubviewOfContentView {
                             viewModel.topTabBarHoverSelection = -1
                         }
                     }
-                    Button {
-                        viewModel.topTabBarSelection = 2
-                    } label: {
-                        Label("Workshop", systemImage: "cloud.fill")
-                            .contentShape(Rectangle())
-                            .foregroundStyle(viewModel.topTabBarSelection == 2 ? .white : .primary)
-                            .foregroundStyle(viewModel.topTabBarHoverSelection == 2 ? .white : .primary)
-                            .font(.title3)
-                            .padding(4)
-                    }
-                    .background(viewModel.topTabBarSelection == 2 ? Color.blue : Color.clear)
-                    .background(viewModel.topTabBarHoverSelection == 2 ? Color.blue : Color.clear)
-                    .overlay(Rectangle()
-                        .stroke(lineWidth: 2)
-                        .foregroundStyle(Color.accentColor))
-                    .onHover { hovering in
-                        if hovering {
-                            viewModel.topTabBarHoverSelection = 2
-                        } else {
-                            viewModel.topTabBarHoverSelection = -1
-                        }
-                    }
                 }
                 .animation(.default, value: viewModel.topTabBarSelection)
                 .animation(.default, value: viewModel.topTabBarHoverSelection)

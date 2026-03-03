@@ -58,11 +58,9 @@ struct ContentView: View {
                             }
                             .animation(.default, value: viewModel.isFilterReveal)
                         case 1:
-                            WallpaperDiscover()
+                            WallpaperDiscover(contentViewModel: viewModel)
                         case 2:
-                            ExplorerTopBar(contentViewModel: viewModel)
-                            WorkingInProgress()
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            WallpaperDiscover(contentViewModel: viewModel)
                         default:
                             fatalError()
                         }

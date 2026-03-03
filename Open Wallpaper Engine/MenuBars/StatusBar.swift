@@ -48,9 +48,8 @@ extension AppDelegate {
         try! Process.run(URL(filePath: "/usr/sbin/screencapture"), arguments: ["-Cmup", "~/Picturesscreenshot.png"])
     }
     
-    @objc func browseWorkshop() {
-        // Change tab selection to `Workshop`
-        self.contentViewModel.topTabBarSelection = 2
+    @objc func browseDiscover() {
+        self.contentViewModel.topTabBarSelection = 1
         openMainWindow()
     }
     
@@ -83,10 +82,10 @@ extension AppDelegate {
             
             .separator(),
             
-            .init(title: String(localized: "Browse Workshop"),
+            .init(title: String(localized: "Browse Discover"),
                   systemImage: "globe",
-                  action: #selector(browseWorkshop),
-                  keyEquivalent: "w"),
+                  action: #selector(browseDiscover),
+                  keyEquivalent: "d"),
             
 //            .init(title: "Create Wallpaper",
 //                  systemImage: "pencil.and.ruler.fill",

@@ -26,6 +26,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     var importOpenPanel: NSOpenPanel!
     
     var eventHandler: Any?
+    var spaceObserver: Any?
+    var lastStaticWallpaperUrl: URL?
     
     static var shared = AppDelegate()
     
@@ -47,6 +49,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         
         // 将外部输入传递到壁纸窗口
         AppDelegate.shared.setEventHandler()
+
+        // Aplica wallpaper estático ao trocar de Space
+        self.spaceObserver = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.activeSpaceDidChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.reapplyStaticWallpaper()
+        }
     }
     
     func applicationDockMenu(_ sender: NSApplication) -> NSMenu? {
@@ -148,13 +159,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         
         self.wallpaperWindow.styleMask = [.borderless, .fullSizeContentView]
         self.wallpaperWindow.level = NSWindow.Level(Int(CGWindowLevelForKey(.desktopWindow)))
-        self.wallpaperWindow.collectionBehavior = .stationary
-        
-        self.wallpaperWindow.setFrame(NSRect(origin: .zero,
-                                             size: CGSize(width: NSScreen.main!.visibleFrame.size.width,
-                                                          height: NSScreen.main!.visibleFrame.size.height + NSScreen.main!.visibleFrame.origin.y + 1)
-                                            ),
-                                      display: true)
+        self.wallpaperWindow.collectionBehavior = [.canJoinAllSpaces, .stationary]
+
+        self.wallpaperWindow.setFrame(NSScreen.main!.frame, display: true)
         self.wallpaperWindow.isMovable = false
         self.wallpaperWindow.titlebarAppearsTransparent = true
         self.wallpaperWindow.titleVisibility = .hidden
@@ -226,31 +233,43 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
     
     func setPlacehoderWallpaper(with wallpaper: WEWallpaper) {
-        switch wallpaper.project.type {
+        switch wallpaper.project.type.lowercased() {
         case "video":
-            let asset = AVAsset(url: wallpaper.wallpaperDirectory.appending(component: wallpaper.project.file))
-            let imageGenerator = AVAssetImageGenerator(asset: asset)
-            imageGenerator.appliesPreferredTrackTransform = true
-            
-            let time = CMTimeMake(value: 1, timescale: 1) // 第一帧的时间
-            imageGenerator.generateCGImagesAsynchronously(forTimes: [NSValue(time: time)]) { _, cgImage, _, _, error in
-                if let error = error {
-                    print(error)
-                } else if let cgImage = cgImage {
-                    let nsImage = NSImage(cgImage: cgImage, size: .zero)
-                    if let data = nsImage.tiffRepresentation {
-                        do {
-                            let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "staticWP_\(wallpaper.wallpaperDirectory.hashValue).tiff")
-                            try data.write(to: url, options: .atomic)
-                            try NSWorkspace.shared.setDesktopImageURL(url, for: .main!)
-                        } catch {
-                            print(error)
-                        }
-                    }
-                }
+            self.lastStaticWallpaperUrl = nil
+            return
+        case "web", "scene":
+            guard self.globalSettingsViewModel.settings.adjustMenuBarTint else { return }
+
+            let cacheDir = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+            let cacheUrl = cacheDir.appending(path: "staticWP_\(wallpaper.wallpaperDirectory.hashValue).tiff")
+            let previewPath = wallpaper.wallpaperDirectory.appending(component: wallpaper.project.preview)
+            if let image = NSImage(contentsOf: previewPath), let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil) {
+                applyStaticWallpaper(cgImage: cgImage, cacheUrl: cacheUrl)
             }
         default:
             return
+        }
+    }
+
+    private func applyStaticWallpaper(cgImage: CGImage, cacheUrl: URL) {
+        let nsImage = NSImage(cgImage: cgImage, size: .zero)
+        guard let data = nsImage.tiffRepresentation else { return }
+        do {
+            try data.write(to: cacheUrl, options: .atomic)
+            self.lastStaticWallpaperUrl = cacheUrl
+            for screen in NSScreen.screens {
+                try NSWorkspace.shared.setDesktopImageURL(cacheUrl, for: screen)
+            }
+        } catch {
+            print("Failed to set static wallpaper: \(error)")
+        }
+    }
+
+    private func reapplyStaticWallpaper() {
+        guard self.globalSettingsViewModel.settings.adjustMenuBarTint else { return }
+        guard let url = lastStaticWallpaperUrl else { return }
+        for screen in NSScreen.screens {
+            try? NSWorkspace.shared.setDesktopImageURL(url, for: screen)
         }
     }
 }

@@ -184,16 +184,23 @@ class GlobalSettingsViewModel: ObservableObject {
     }
     
     func didChangeAdjustMenuBarTint(_ newValue: Bool) {
-        if newValue != true {
-            if let wallpaper = UserDefaults.standard.url(forKey: "OSWallpaper") {
-                try? NSWorkspace.shared.setDesktopImageURL(wallpaper, for: .main!)
+        let currentWallpaperType = AppDelegate.shared.wallpaperViewModel.currentWallpaper.project.type.lowercased()
+
+        if currentWallpaperType == "video" {
+            if newValue {
+                AppDelegate.shared.setPlacehoderWallpaper(with: AppDelegate.shared.wallpaperViewModel.currentWallpaper)
             }
-        } else {
-            do {
-                let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "staticWP_\(AppDelegate.shared.wallpaperViewModel.currentWallpaper.wallpaperDirectory.hashValue).tiff")
-                try NSWorkspace.shared.setDesktopImageURL(url, for: .main!)
-            } catch {
-                print(error)
+            return
+        }
+
+        if newValue {
+            AppDelegate.shared.setPlacehoderWallpaper(with: AppDelegate.shared.wallpaperViewModel.currentWallpaper)
+            return
+        }
+
+        if let wallpaper = UserDefaults.standard.url(forKey: "OSWallpaper") {
+            for screen in NSScreen.screens {
+                try? NSWorkspace.shared.setDesktopImageURL(wallpaper, for: screen)
             }
         }
     }
